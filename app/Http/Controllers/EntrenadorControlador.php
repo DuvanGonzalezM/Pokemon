@@ -13,7 +13,9 @@ class EntrenadorControlador extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return "hola controlador resource";
+        $entrenadores = Entrenador::all();
+
+        return view('entrenadores.index', compact('entrenadores'));
     }
 
     /**
