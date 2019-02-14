@@ -30,9 +30,11 @@ class EntrenadorControlador extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $entrenador = new Entrenador();
+        $entrenador->nombre = $request->input('nombre');
+        $entrenado->save();
+        return "Enviado";
     }
 
     /**
