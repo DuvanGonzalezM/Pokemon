@@ -20,3 +20,4 @@ Route::get('mi_primera_ruta', function(){ //Rutas 'normales'
 Route::get('nombre/{nombre}/apellido/{apellido?}', function($nombre,$apellido = null){//Rutas con parametros, donde se indica que uno de ellos es parametro opcional con el signo "?" u de le da un default de "null"
 	return "Hola ".$nombre.$apellido;
 });
+Route::get('prueba/{nombre}','controlador_basico_manual@prueba');//Ruta con redireccionamiento a un controlador y solicitando cierta funcion separandolo con "@"
