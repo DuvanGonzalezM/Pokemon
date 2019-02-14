@@ -2,6 +2,7 @@
 
 namespace Pokemon\Http\Controllers;
 
+use Pokemon\Entrenador;
 use Illuminate\Http\Request;
 
 class EntrenadorControlador extends Controller
@@ -33,7 +34,7 @@ class EntrenadorControlador extends Controller
     public function store(Request $request){
         $entrenador = new Entrenador();
         $entrenador->nombre = $request->input('nombre');
-        $entrenado->save();
+        $entrenador->save();
         return "Enviado";
     }
 
