@@ -34,9 +34,16 @@ class EntrenadorControlador extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $nombrefile = time().$file->getClientOriginalName();
+            $file->move(public_path().'/imagenes/',$nombrefile);
+        }
         $entrenador = new Entrenador();
         $entrenador->nombre = $request->input('nombre');
+        $entrenador->avatar = $nombrefile;
         $entrenador->save();
+
         return "Enviado";
     }
 

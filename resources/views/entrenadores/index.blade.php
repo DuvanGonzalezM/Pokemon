@@ -7,6 +7,7 @@
 		@foreach($entrenadores as $entrenador)
 		<div class="col-sm">
 			<div class="card" style="width: 18rem;">
+				<img src="imagenes/{{$entrenador->avatar}}" alt="" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">{{$entrenador->nombre}}</h5>
 					<p class="card-text">Hola</p>
