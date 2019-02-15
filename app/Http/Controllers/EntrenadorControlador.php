@@ -57,7 +57,8 @@ class EntrenadorControlador extends Controller
      */
     public function show($id)
     {
-        //
+        $entrenador = Entrenador::find($id);
+        return view('entrenadores.show', compact('entrenador'));
     }
 
     /**
