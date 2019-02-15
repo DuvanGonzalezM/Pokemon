@@ -55,9 +55,9 @@ class EntrenadorControlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $entrenador = Entrenador::find($id);
+        $entrenador = Entrenador::where('slug', '=', $slug)->firstOrFail();
         return view('entrenadores.show', compact('entrenador'));
     }
 
