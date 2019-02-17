@@ -7,5 +7,6 @@
 		<div class="card-body text-center">
 			<h5 class="card-title">{{$entrenador->nombre}}</h5>
 			<p class="card-text">{{$entrenador->descripcion}}</p>
+			<a href="/entrenadores/{{$entrenador->slug}}/edit" class="btn btn-primary">Editar</a>
 		</div>
 @endsection

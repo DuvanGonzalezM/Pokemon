@@ -15,6 +15,6 @@
 			<label for="">Avatar</label>
 			<input type="file"  name="avatar"><br>
 		</div>
-		<input type="submit" class="btn btn-primary">
+		<input type="submit" class="btn btn-primary" value="Enviar">
 	</form>
 @endsection

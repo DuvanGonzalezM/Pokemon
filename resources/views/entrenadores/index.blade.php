@@ -11,7 +11,7 @@
 				<div class="card-body">
 					<h5 class="card-title">{{$entrenador->nombre}}</h5>
 					<p class="card-text">{{$entrenador->descripcion}}</p>
-					<a href="entrenadores/{{$entrenador->slug}}" class="btn btn-primary">Pefil</a>
+					<a href="/entrenadores/{{$entrenador->slug}}" class="btn btn-primary">Ver más...</a>
 				</div>
 			</div>
 		</div>
