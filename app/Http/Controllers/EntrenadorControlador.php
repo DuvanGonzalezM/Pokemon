@@ -33,6 +33,10 @@ class EntrenadorControlador extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        $validaciones =$request->validate([
+            'nombre'=>'required|max: 10',
+            'avatar'=>'required',
+        ]);
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $nombrefile = time().$file->getClientOriginalName();
