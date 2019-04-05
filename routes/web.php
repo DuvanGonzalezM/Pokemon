@@ -22,3 +22,6 @@ Route::get('nombre/{nombre}/apellido/{apellido?}', function($nombre,$apellido = 
 });
 Route::get('prueba/{nombre}','controlador_basico_manual@prueba');//Ruta con redireccionamiento a un controlador y solicitando cierta funcion separandolo con "@"
 Route::resource('entrenadores', 'EntrenadorControlador');//Ruta resource que nos redirige a un controlador resource y aplica igual que el anterior a las funciones
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
