@@ -14,7 +14,6 @@ class EntrenadorControlador extends Controller
      */
     public function index() {
         $entrenadores = Entrenador::all();
-
         return view('entrenadores.index', compact('entrenadores'));
     }
 
@@ -34,6 +33,10 @@ class EntrenadorControlador extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        $validaciones =$request->validate([
+            'nombre'=>'required|max: 10',
+            'avatar'=>'required',
+        ]);
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $nombrefile = time().$file->getClientOriginalName();
@@ -41,7 +44,9 @@ class EntrenadorControlador extends Controller
         }
         $entrenador = new Entrenador();
         $entrenador->nombre = $request->input('nombre');
+        $entrenador->slug = $entrenador->nombre;
         $entrenador->avatar = $nombrefile;
+        $entrenador->descripcion = $request->input('descripcion');
         $entrenador->save();
 
         return "Enviado";
@@ -53,9 +58,9 @@ class EntrenadorControlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($slug){
+        $entrenador = Entrenador::where('slug', '=', $slug)->firstOrFail();
+        return view('entrenadores.show', compact('entrenador'));
     }
 
     /**
@@ -64,9 +69,9 @@ class EntrenadorControlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($slug){
+        $entrenador = Entrenador::where('slug', '=', $slug)->firstOrFail();
+        return view('entrenadores.edit', compact('entrenador'));
     }
 
     /**
@@ -76,9 +81,17 @@ class EntrenadorControlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $slug){
+        $entrenador = Entrenador::where('slug', '=', $slug)->firstOrFail();
+        $entrenador->fill($request->except('avatar'));
+        if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $nombrefile = time().$file->getClientOriginalName();
+            $file->move(public_path().'/imagenes/',$nombrefile);
+        }
+        $entrenador->avatar = $nombrefile;
+        $entrenador->save();
+        return "Actualizado";
     }
 
     /**

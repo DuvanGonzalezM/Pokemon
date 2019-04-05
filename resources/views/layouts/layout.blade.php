@@ -6,7 +6,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-dark bg-primary">
-		<a href="#" class="navbar-brand">Pokemon</a>
+		<a href="/entrenadores" class="navbar-brand">Pokemon</a>
 	</nav>
 	<div class="container">
 		@yield('contenido')
