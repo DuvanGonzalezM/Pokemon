@@ -4,7 +4,7 @@ namespace Pokemon\Http\Controllers;
 
 use Pokemon\Entrenador;
 use Illuminate\Http\Request;
-
+use Pokemon\Http\Requests\StoreTrainingRequest;
 class EntrenadorControlador extends Controller
 {
     /**
@@ -32,11 +32,7 @@ class EntrenadorControlador extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        $validaciones =$request->validate([
-            'nombre'=>'required|max: 10',
-            'avatar'=>'required',
-        ]);
+    public function store(StoreTrainingRequest $request){
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $nombrefile = time().$file->getClientOriginalName();
@@ -49,7 +45,7 @@ class EntrenadorControlador extends Controller
         $entrenador->descripcion = $request->input('descripcion');
         $entrenador->save();
 
-        return "Enviado";
+        return redirect()->route('entrenadores.index');
     }
 
     /**
@@ -84,6 +80,7 @@ class EntrenadorControlador extends Controller
     public function update(Request $request, $slug){
         $entrenador = Entrenador::where('slug', '=', $slug)->firstOrFail();
         $entrenador->fill($request->except('avatar'));
+        $nombrefile = $entrenador->avatar;
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $nombrefile = time().$file->getClientOriginalName();
@@ -91,7 +88,7 @@ class EntrenadorControlador extends Controller
         }
         $entrenador->avatar = $nombrefile;
         $entrenador->save();
-        return "Actualizado";
+        return redirect()->route('entrenadores.show', [$slug])->with('status', '¡Los datos se han actualizado correctamente!');
     }
 
     /**
@@ -102,6 +99,8 @@ class EntrenadorControlador extends Controller
      */
     public function destroy($id)
     {
-        //
+        $entrenador = Entrenador::where('slug', $id)->first();
+        $entrenador->delete();
+        return redirect()->route('entrenadores.index');
     }
 }
